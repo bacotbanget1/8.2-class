@@ -3,25 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kelas 8.2 Website | desain by Rayhan</title>
+    <title>Kelas 8.2 | Unggul & Berakhlak Mulia</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Lora:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
         :root {
-            --primary-color: #0d47a1;
-            --accent-color: #ffc107;
-            --text-dark: #333;
+            --primary-color: #1a237e; /* Darker, richer blue */
+            --accent-color: #ffd740; /* Golden Yellow */
+            --text-dark: #212121;
             --text-light: #fff;
-            --bg-light: #f4f4f9;
-            --danger-color: #d32f2f;
+            --bg-light: #f9f9fb;
+            --card-bg: #ffffff;
+            --danger-color: #e53935;
+            --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 8px 20px rgba(0, 0, 0, 0.1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Inter', sans-serif;
             background-color: var(--bg-light);
             color: var(--text-dark);
             line-height: 1.6;
@@ -29,112 +33,198 @@
 
         .container { width: 90%; max-width: 1200px; margin: 0 auto; }
 
+        /* Typography */
         .big-title {
             font-family: 'Lora', serif;
-            font-size: 3.5rem;
-            color: var(--primary-color);
-            margin-bottom: 10px;
+            font-size: 4rem;
+            color: var(--text-light);
+            margin-bottom: 5px;
+            font-weight: 700;
         }
-
+        .section-title {
+            text-align: center; font-family: 'Lora', serif;
+            font-size: 2.5rem; margin-bottom: 60px;
+            color: var(--primary-color);
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -15px;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 4px;
+            background-color: var(--accent-color);
+            border-radius: 2px;
+        }
         .accent-text { color: var(--accent-color); }
+        .text-white { color: var(--text-light); }
 
         /* Navbar */
         .navbar {
-            background: var(--text-light);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background: var(--card-bg);
+            box-shadow: var(--shadow-light);
             position: sticky; top: 0; z-index: 1000;
         }
         .navbar .container {
             display: flex; justify-content: space-between; align-items: center;
             padding: 15px 0;
         }
+        .logo { font-family: 'Lora', serif; font-size: 1.8rem; color: var(--primary-color); font-weight: 700; }
         .navbar ul { list-style: none; display: flex; }
         .navbar ul li a {
             color: var(--text-dark); text-decoration: none;
-            padding: 10px 15px; transition: 0.3s;
+            padding: 10px 18px; transition: 0.3s;
+            font-weight: 600;
+            border-radius: 5px;
         }
-        .navbar ul li a:hover { color: var(--primary-color); }
+        .navbar ul li a:hover, .navbar ul li a.active { 
+            color: var(--primary-color);
+            background-color: rgba(26, 35, 126, 0.05);
+        }
+        /* Mobile Menu */
+        .menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; color: var(--primary-color); }
+        @media (max-width: 768px) {
+            .navbar nav { display: none; }
+            .navbar nav.open { 
+                display: block; 
+                position: absolute; 
+                top: 65px; left: 0; right: 0; 
+                background: var(--card-bg); 
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+                padding: 10px 0;
+            }
+            .navbar ul { flex-direction: column; text-align: center; }
+            .navbar ul li a { display: block; padding: 12px; }
+            .menu-toggle { display: block; }
+        }
 
         /* Hero */
         .hero-section {
-            background: linear-gradient(rgba(13,71,161,0.8), rgba(13,71,161,0.5)), url('') no-repeat center/cover;
-            height: 60vh; display: flex; justify-content: center; align-items: center; text-align: center;
+            background: linear-gradient(rgba(26,35,126,0.8), rgba(26,35,126,0.6)), url('placeholder-bg.jpg') no-repeat center/cover;
+            /* Ganti 'placeholder-bg.jpg' dengan gambar kelas yang relevan */
+            height: 70vh; display: flex; justify-content: center; align-items: center; text-align: center;
             color: var(--text-light);
         }
-        .hero-content .big-title { color: var(--text-light); font-size: 4rem; }
+        .hero-section p { font-size: 1.2rem; }
 
         /* Section umum */
-        .section-padding { padding: 80px 0; }
-        .section-title {
-            text-align: center; font-family: 'Lora', serif;
-            font-size: 2.5rem; margin-bottom: 50px;
-        }
+        .section-padding { padding: 90px 0; }
         .accent-bg { background-color: var(--primary-color); }
-        .text-white { color: var(--text-light); }
 
         /* Kartu Profil */
         .profile-cards {
             display: flex; gap: 30px; justify-content: center; flex-wrap: wrap;
         }
         .card {
-            background: var(--text-light); padding: 30px; border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center;
-            max-width: 300px; transition: 0.3s;
+            background: var(--card-bg); padding: 30px; border-radius: 15px;
+            box-shadow: var(--shadow-light); text-align: center;
+            max-width: 320px; transition: 0.4s;
+            border-top: 5px solid var(--accent-color);
         }
-        .card:hover { transform: translateY(-5px); }
-        .role { color: var(--accent-color); font-weight: 600; margin-bottom: 5px; }
-        .name { font-family: 'Lora', serif; font-size: 1.8rem; color: var(--primary-color); }
+        .card:hover { transform: translateY(-7px); box-shadow: var(--shadow-hover); }
+        .role { color: var(--primary-color); font-weight: 700; margin-bottom: 5px; font-size: 0.9rem; letter-spacing: 1px; }
+        .name { font-family: 'Lora', serif; font-size: 1.8rem; color: var(--text-dark); margin-bottom: 10px; }
+        .quote { font-style: italic; color: #555; }
+        .card i { font-size: 2rem; color: var(--accent-color); margin-bottom: 15px; }
 
         /* Jadwal Piket */
         .piket-section {
-            background-color: #fff;
-            border-radius: 12px;
-            padding: 40px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 40px 20px; 
+            box-shadow: var(--shadow-light);
+            /* Memungkinkan scroll horizontal di mobile */
+            overflow-x: auto; 
+            -webkit-overflow-scrolling: touch;
         }
         .piket-table {
             width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
+            border-collapse: separate; 
+            border-spacing: 0;
+            margin-top: 30px;
+            min-width: 600px; /* Pastikan ada lebar minimum untuk scroll */
         }
         .piket-table th, .piket-table td {
-            border: 1px solid #ddd;
-            padding: 10px 15px;
-            text-align: left;
+            padding: 15px 10px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+            border-right: 1px solid #eee;
         }
+        .piket-table th:first-child, .piket-table td:first-child { border-left: 1px solid #eee; }
+        .piket-table tr:last-child td { border-bottom: none; }
+
         .piket-table th {
             background-color: var(--primary-color);
             color: var(--text-light);
+            font-weight: 700;
+            text-transform: uppercase;
         }
-        .piket-table td span.red {
+        .piket-table tr:first-child th:first-child { border-top-left-radius: 10px; }
+        .piket-table tr:first-child th:last-child { border-top-right-radius: 10px; }
+
+        .piket-table td {
+            line-height: 1.8;
+            font-size: 0.95rem;
+            /* Teks biasa harus terlihat jelas */
+            color: var(--text-dark); 
+        }
+        /* Background baris ganjil */
+        .piket-table tr:nth-child(odd) td {
+            background-color: var(--bg-light); 
+        }
+        /* Background baris genap (Alternating row color) */
+        .piket-table tr:nth-child(even) td { 
+            background-color: #e8eaf6; 
+        }
+        
+        .piket-table span.red {
             color: var(--danger-color);
-            font-weight: 600;
+            font-weight: 700;
         }
 
         /* Daftar nama siswa */
         .student-list {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 10px;
-            background: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            gap: 15px;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: var(--shadow-light);
         }
         .student-item {
-            background: var(--bg-light);
-            padding: 8px 12px;
-            border-radius: 6px;
+            background: #f1f3ff; /* Light blue/primary tone */
+            color: var(--primary-color);
+            padding: 10px 15px;
+            border-radius: 8px;
             text-align: center;
-            font-weight: 500;
+            font-weight: 600;
+            transition: 0.3s;
         }
-
+        .student-item:hover {
+            background: var(--primary-color);
+            color: var(--text-light);
+            transform: scale(1.05);
+        }
+        
+        /* Footer */
         footer {
             background: var(--text-dark);
-            color: #bbb;
+            color: #ccc;
             text-align: center;
-            padding: 20px 0;
+            padding: 30px 0;
             font-size: 0.9rem;
+            margin-top: 50px;
+        }
+        footer a { color: var(--accent-color); text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+
+        /* Media Query untuk Mobile */
+        @media (max-width: 768px) {
+            .section-padding { padding: 60px 0; }
+            .hero-content .big-title { font-size: 3rem; }
         }
     </style>
 </head>
@@ -142,127 +232,179 @@
 
 <header class="navbar">
     <div class="container">
-        <h1>8.2 <span class="accent-text">Class</span></h1>
-        <nav>
+        <div class="logo">8.2 <span class="accent-text">Class</span></div>
+        <nav id="main-nav">
             <ul>
-                <li><a href="#home">Beranda</a></li>
+                <li><a href="#home" class="active">Beranda</a></li>
                 <li><a href="#profil">Profil</a></li>
-                <li><a href="#jadwal">Jadwal</a></li>
-                <li><a href="#piket">Piket</a></li>
-                <li><a href="#siswa">Siswa</a></li>
+                <li><a href="#piket">Jadwal Piket</a></li>
+                <li><a href="#siswa">Daftar Siswa</a></li>
             </ul>
         </nav>
+        <div class="menu-toggle" id="menu-toggle"><i class="fas fa-bars"></i></div>
     </div>
 </header>
 
-<section id="home" class="hero-section">
-    <div class="hero-content" data-aos="fade-up">
-        <h2>Selamat Datang di</h2>
-        <p class="big-title">Kelas 8.2</p>
-        <p>Wadah Kolaborasi, Kreasi, dan Inspirasi Siswa Terbaik.</p>
-    </div>
-</section>
+<main>
+    <section id="home" class="hero-section">
+        <div class="hero-content" data-aos="fade-up">
+            <h2 class="text-white" style="font-weight: 400;">Selamat Datang di</h2>
+            <p class="big-title">Kelas 8.2</p>
+            <p style="font-size: 1.1rem; font-weight: 300;">Wadah Kolaborasi, Kreasi, dan Inspirasi Siswa Terbaik.</p>
+        </div>
+    </section>
 
-<section id="profil" class="section-padding">
-    <div class="container">
-        <h2 class="section-title" data-aos="fade-right">👩‍🏫 Wali Kelas & Pengurus Inti</h2>
-        <div class="profile-cards">
-            <div class="card" data-aos="zoom-in">
-                <p class="role">WALI KELAS</p>
-                <h3 class="name">Nurasiah Pasaribu</h3>
-                <p>"Mengajar dengan hati, memimpin dengan inspirasi."</p>
-            </div>
-            <div class="card" data-aos="zoom-in">
-                <p class="role">KETUA KELAS</p>
-                <h3 class="name">Fauzan</h3>
-                <p>"Pemimpin yang ganteng, keren, cepat, dapat di percaya, sigap dan bertanggung jawab."</p>
-            </div>
-            <div class="card" data-aos="zoom-in">
-                <p class="role">WAKIL KETUA</p>
-                <h3 class="name">Nugi</h3>
-                <p>"wakil ketua yang ganteng,sigap,cepat,mudah di percaya,baik hati"</p>
+    <section id="profil" class="section-padding">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-right"><i class="fas fa-users-cog"></i> Wali Kelas & Pengurus Inti</h2>
+            <div class="profile-cards">
+                <div class="card" data-aos="zoom-in" data-aos-delay="100">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <p class="role">WALI KELAS</p>
+                    <h3 class="name">Nurasiah Pasaribu</h3>
+                    <p class="quote">"Mengajar dengan hati, memimpin dengan inspirasi."</p>
+                </div>
+                <div class="card" data-aos="zoom-in" data-aos-delay="200">
+                    <i class="fas fa-user-tie"></i>
+                    <p class="role">KETUA KELAS</p>
+                    <h3 class="name">Fauzan</h3>
+                    <p class="quote">"Pemimpin yang ganteng, keren, cepat, dapat di percaya, sigap dan bertanggung jawab."</p>
+                </div>
+                <div class="card" data-aos="zoom-in" data-aos-delay="300">
+                    <i class="fas fa-user-shield"></i>
+                    <p class="role">WAKIL KETUA</p>
+                    <h3 class="name">Nugi</h3>
+                    <p class="quote">"wakil ketua yang ganteng,sigap,cepat,mudah di percaya,baik hati"</p>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section id="piket" class="section-padding accent-bg text-white">
-    <div class="container">
-        <h2 class="section-title">🧹 Jadwal Piket Kelas</h2>
-        <div class="piket-section" data-aos="fade-up">
-            <table class="piket-table">
-                <tr>
-                    <th>Senin</th>
-                    <th>Selasa</th>
-                    <th>Rabu</th>
-                    <th>Kamis</th>
-                    <th>Jum'at</th>
-                </tr>
-                <tr>
-                    <td>Anin<br>Meitha<br>Syakira<br>Delwyn<br><span class="red">Gilbert</span><br>Fauzan<br>Revan</td>
-                    <td><span class="red">Fahira</span><br>Nirza<br>Tania<br>Dika<br>Hanif<br>Firzheco<br>Nugi</td>
-                    <td>Qonita<br>Putri<br><span class="red">Nuraisyah/Eca</span><br>Yuda<br>Javier<br>Faiq<br>Rizky</td>
-                    <td>Saskia<br><span class="red">Kela</span><br>Basid<br>Ega<br>Sini<br>Nofal<br>Fawaz</td>
-                    <td>Saida<br>Silva<br>Dekianu<br>Fadil<br><span class="red">Drizle</span><br>Rayhan</td>
-                </tr>
-            </table>
+    <section id="piket" class="section-padding accent-bg text-white">
+        <div class="container">
+            <h2 class="section-title text-white"><i class="fas fa-calendar-check"></i> Jadwal Piket Kelas</h2>
+            <div class="piket-section" data-aos="fade-up">
+                <table class="piket-table">
+                    <thead>
+                        <tr>
+                            <th>Senin</th>
+                            <th>Selasa</th>
+                            <th>Rabu</th>
+                            <th>Kamis</th>
+                            <th>Jum'at</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Anin<br>Meitha<br>Syakira<br>Delwyn<br><span class="red">Gilbert</span><br>Fauzan<br>Revan</td>
+                            <td><span class="red">Fahira</span><br>Nirza<br>Tania<br>Dika<br>Hanif<br>Firzheco<br>Nugi</td>
+                            <td>Qonita<br>Putri<br><span class="red">Nuraisyah/Eca</span><br>Yuda<br>Javier<br>Faiq<br>Rizky</td>
+                            <td>Saskia<br><span class="red">Kela</span><br>Basid<br>Ega<br>Sini<br>Nofal<br>Fawaz</td>
+                            <td>Saida<br>Silva<br>Dekianu<br>Fadil<br><span class="red">Drizle</span><br>Rayhan</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="text-align: center; color: var(--text-dark); background-color: var(--card-bg); padding: 10px; border-radius: 0 0 15px 15px; margin: -40px -20px 0 -20px; font-style: italic;">Siswa yang namanya diwarnai **merah** adalah koordinator/penanggung jawab harian.</p>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section id="siswa" class="section-padding">
-    <div class="container">
-        <h2 class="section-title" data-aos="fade-right">👥 Daftar Nama Siswa</h2>
-        <div class="student-list" data-aos="zoom-in">
-            <div class="student-item">Aini</div>
-            <div class="student-item">Anin</div>
-            <div class="student-item">Basid</div>
-            <div class="student-item">Dekianu</div>
-            <div class="student-item">Delwyn</div>
-            <div class="student-item">Dika</div>
-            <div class="student-item">Drizle</div>
-            <div class="student-item">Ega</div>
-            <div class="student-item">Fadil</div>
-            <div class="student-item">Fahira</div>
-            <div class="student-item">Faiq</div>
-            <div class="student-item">Fauzan</div>
-            <div class="student-item">Firzheco</div>
-            <div class="student-item">Fawaz</div>
-            <div class="student-item">Gilbert</div>
-            <div class="student-item">Hanif</div>
-            <div class="student-item">Javier</div>
-            <div class="student-item">Kela</div>
-            <div class="student-item">Meitha</div>
-            <div class="student-item">Nirza</div>
-            <div class="student-item">Nofal</div>
-            <div class="student-item">Nugi</div>
-            <div class="student-item">Nuraisyah/Eca</div>
-            <div class="student-item">Putri</div>
-            <div class="student-item">Qonita</div>
-            <div class="student-item">Rayhan</div>
-            <div class="student-item">Revan</div>
-            <div class="student-item">Ridwan</div>
-            <div class="student-item">Rizky</div>
-            <div class="student-item">Saida</div>
-            <div class="student-item">Saskia</div>
-            <div class="student-item">Silva</div>
-            <div class="student-item">Sini</div>
-            <div class="student-item">Syakira</div>
-            <div class="student-item">Tania</div>
-            <div class="student-item">Yuda</div>
-            <div class="student-item">Zecho</div>
+    <section id="siswa" class="section-padding">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-right"><i class="fas fa-list-alt"></i> Daftar Nama Siswa</h2>
+            <div class="student-list" data-aos="zoom-in">
+                <div class="student-item">Aini</div>
+                <div class="student-item">Anin</div>
+                <div class="student-item">Basid</div>
+                <div class="student-item">Dekianu</div>
+                <div class="student-item">Delwyn</div>
+                <div class="student-item">Dika</div>
+                <div class="student-item">Drizle</div>
+                <div class="student-item">Ega</div>
+                <div class="student-item">Fadil</div>
+                <div class="student-item">Fahira</div>
+                <div class="student-item">Faiq</div>
+                <div class="student-item">Fauzan</div>
+                <div class="student-item">Firzheco</div>
+                <div class="student-item">Fawaz</div>
+                <div class="student-item">Gilbert</div>
+                <div class="student-item">Hanif</div>
+                <div class="student-item">Javier</div>
+                <div class="student-item">Kela</div>
+                <div class="student-item">Meitha</div>
+                <div class="student-item">Nirza</div>
+                <div class="student-item">Nofal</div>
+                <div class="student-item">Nugi</div>
+                <div class="student-item">Nuraisyah/Eca</div>
+                <div class="student-item">Putri</div>
+                <div class="student-item">Qonita</div>
+                <div class="student-item">Rayhan</div>
+                <div class="student-item">Revan</div>
+                <div class="student-item">Ridwan</div>
+                <div class="student-item">Rizky</div>
+                <div class="student-item">Saida</div>
+                <div class="student-item">Saskia</div>
+                <div class="student-item">Silva</div>
+                <div class="student-item">Sini</div>
+                <div class="student-item">Syakira</div>
+                <div class="student-item">Tania</div>
+                <div class="student-item">Yuda</div>
+                <div class="student-item">Zecho</div>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+</main>
 
 <footer>
     <div class="container">
-        <p>&copy; 2025 Kelas 8.2 | Unggul dan Berakhlak Mulia | Desain oleh Rayhan</p>
+        <p>&copy; 2025 Kelas 8.2 | Unggul dan Berakhlak Mulia | Desain Ulang oleh <a href="#" target="_blank">AI Assistant</a>, berdasarkan desain awal <a href="#" target="_blank">Rayhan</a>.</p>
     </div>
 </footer>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>AOS.init({duration:1000, once:true});</script>
+<script>
+    AOS.init({duration:1000, once:true});
+
+    // Script untuk Toggle Navigasi di Mobile
+    document.getElementById('menu-toggle').addEventListener('click', function() {
+        document.getElementById('main-nav').classList.toggle('open');
+    });
+
+    // Script untuk menandai link aktif
+    document.querySelectorAll('.navbar ul li a').forEach(link => {
+        link.addEventListener('click', function() {
+            document.querySelectorAll('.navbar ul li a').forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
+            // Menutup menu mobile setelah klik (opsional)
+            if (window.innerWidth <= 768) {
+                document.getElementById('main-nav').classList.remove('open');
+            }
+        });
+    });
+
+    // Menandai link aktif saat scroll
+    window.addEventListener('scroll', () => {
+        let current = '';
+        const sections = document.querySelectorAll('main section');
+        const navHeight = document.querySelector('.navbar').offsetHeight;
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - navHeight - 10;
+            const sectionHeight = section.clientHeight;
+            if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        document.querySelectorAll('.navbar ul li a').forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').includes(current)) {
+                link.classList.add('active');
+            }
+        });
+    });
+
+</script>
 
 </body>
 </html>
